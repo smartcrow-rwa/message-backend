@@ -21,7 +21,8 @@ const port = process.env.PORT || 3000;
 
 // Enable CORS for frontend (Enable only 1)
 app.use(cors({ origin: 
-  'https://smartcrow.xyz'
+  // 'https://smartcrow.xyz'
+  '*'
  }));
 app.use(express.json()); // Parse JSON bodies
 app.use(express.urlencoded({ extended: true, limit: '10kb' })); // Parse URL-encoded bodies
