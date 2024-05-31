@@ -27,7 +27,7 @@ export async function getPropertyDetails(
             const response: AxiosResponse = await axios.get(apiUrl, { headers, params });
         
             // Extract LastSaleDate and LastSalePrice from the API response
-            const lastSaleDate: string = response.data.Data.Listing.LastSaleDate;
+            const lastSaleDate: string = response.data.Data.Listing.LastSaleRecordingDate;
             const lastSalePrice: string = response.data.Data.Listing.LastSalePrice;
         
             // Return the extracted values
