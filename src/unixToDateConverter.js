@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.convertUnixTimestamp = void 0;
+exports.convertUnixTimestamp = convertUnixTimestamp;
 // Importing necessary modules
 const luxon_1 = require("luxon");
 // Function to convert Unix timestamp to human-readable date and time
@@ -11,4 +11,3 @@ function convertUnixTimestamp(unixTimestamp) {
     const formattedDateTime = dateTime.toFormat('yyyy-MM-dd HH:mm:ss');
     return formattedDateTime;
 }
-exports.convertUnixTimestamp = convertUnixTimestamp;

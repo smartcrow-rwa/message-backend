@@ -144,6 +144,12 @@ exports.abi = [
         "inputs": [
             {
                 "indexed": true,
+                "internalType": "bytes32",
+                "name": "requestId",
+                "type": "bytes32"
+            },
+            {
+                "indexed": true,
                 "internalType": "address",
                 "name": "sender",
                 "type": "address"
@@ -153,27 +159,28 @@ exports.abi = [
                 "internalType": "address",
                 "name": "receiver",
                 "type": "address"
+            }
+        ],
+        "name": "BonusInfoUpdated",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "bytes32",
+                "name": "requestId",
+                "type": "bytes32"
             },
             {
                 "indexed": true,
                 "internalType": "string",
                 "name": "propertyNumber",
                 "type": "string"
-            },
-            {
-                "indexed": false,
-                "internalType": "uint256",
-                "name": "meetSalesCondition",
-                "type": "uint256"
-            },
-            {
-                "indexed": false,
-                "internalType": "uint256",
-                "name": "postDeadlineCheck",
-                "type": "uint256"
             }
         ],
-        "name": "BonusInfoUpdated",
+        "name": "BonusInfoUpdatedPropertyNumber",
         "type": "event"
     },
     {
@@ -433,6 +440,32 @@ exports.abi = [
     {
         "inputs": [
             {
+                "internalType": "uint64",
+                "name": "_subscriptionID",
+                "type": "uint64"
+            }
+        ],
+        "name": "changeSubscriptionID",
+        "outputs": [],
+        "stateMutability": "payable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "contractAddressString",
+        "outputs": [
+            {
+                "internalType": "string",
+                "name": "",
+                "type": "string"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
                 "internalType": "address",
                 "name": "receiver",
                 "type": "address"
@@ -469,12 +502,12 @@ exports.abi = [
             },
             {
                 "internalType": "uint256",
-                "name": "bonusAmount",
+                "name": "_bonusAmount",
                 "type": "uint256"
             },
             {
                 "internalType": "address",
-                "name": "token",
+                "name": "_token",
                 "type": "address"
             }
         ],
@@ -521,6 +554,45 @@ exports.abi = [
     },
     {
         "inputs": [],
+        "name": "lastError",
+        "outputs": [
+            {
+                "internalType": "bytes",
+                "name": "",
+                "type": "bytes"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "lastRequestId",
+        "outputs": [
+            {
+                "internalType": "bytes32",
+                "name": "",
+                "type": "bytes32"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "lastResponse",
+        "outputs": [
+            {
+                "internalType": "bytes",
+                "name": "",
+                "type": "bytes"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
         "name": "owner",
         "outputs": [
             {
@@ -563,19 +635,6 @@ exports.abi = [
     },
     {
         "inputs": [],
-        "name": "s_lastError",
-        "outputs": [
-            {
-                "internalType": "bytes",
-                "name": "",
-                "type": "bytes"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
         "name": "s_lastRequestId",
         "outputs": [
             {
@@ -588,103 +647,7 @@ exports.abi = [
         "type": "function"
     },
     {
-        "inputs": [],
-        "name": "s_lastResponse",
-        "outputs": [
-            {
-                "internalType": "bytes",
-                "name": "",
-                "type": "bytes"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "s_meetSalesCondition",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "s_postDeadlineCheck",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "s_propertyNumber",
-        "outputs": [
-            {
-                "internalType": "string",
-                "name": "",
-                "type": "string"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "s_receiver",
-        "outputs": [
-            {
-                "internalType": "address",
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "s_sender",
-        "outputs": [
-            {
-                "internalType": "address",
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "s_totalCarbonGas",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
         "inputs": [
-            {
-                "internalType": "uint64",
-                "name": "subscriptionId",
-                "type": "uint64"
-            },
             {
                 "internalType": "string[]",
                 "name": "args",
@@ -700,6 +663,19 @@ exports.abi = [
             }
         ],
         "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "subscriptionID",
+        "outputs": [
+            {
+                "internalType": "uint64",
+                "name": "",
+                "type": "uint64"
+            }
+        ],
+        "stateMutability": "view",
         "type": "function"
     },
     {

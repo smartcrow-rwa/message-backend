@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.checkDeadline = void 0;
+exports.checkDeadline = checkDeadline;
 // Get the current date as a JavaScript Date object
 const currentDateObj = new Date();
 // Format the current date as YYYYMMDD
@@ -28,4 +28,3 @@ function checkDeadline(endDate, minRequestDays) {
         // return currentDateIntegerUnixTimeInSeconds > (endDate);
     });
 }
-exports.checkDeadline = checkDeadline;

@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getPropertyDetails = void 0;
+exports.getPropertyDetails = getPropertyDetails;
 const axios_1 = __importDefault(require("axios"));
 const extractAddressAndZip_1 = require("./extractAddressAndZip");
 const apiUrl = 'https://api.propmix.io/pubrec/assessor/v1/GetPropertyDetails';
@@ -35,7 +35,7 @@ function getPropertyDetails(propertyNumber) {
             // Make the API call using Axios
             const response = yield axios_1.default.get(apiUrl, { headers, params });
             // Extract LastSaleDate and LastSalePrice from the API response
-            const lastSaleDate = response.data.Data.Listing.LastSaleDate;
+            const lastSaleDate = response.data.Data.Listing.LastSaleRecordingDate;
             const lastSalePrice = response.data.Data.Listing.LastSalePrice;
             // Return the extracted values
             return { lastSaleDate, lastSalePrice };
@@ -47,4 +47,3 @@ function getPropertyDetails(propertyNumber) {
         }
     });
 }
-exports.getPropertyDetails = getPropertyDetails;

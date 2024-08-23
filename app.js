@@ -47,13 +47,16 @@ const checkAndUpdate_1 = require("./src/checkAndUpdate");
 // Load environment variables from .env file
 const dotenv = __importStar(require("dotenv"));
 const sendEmail_1 = require("./src/sendEmail");
+const fetchAndStoreTransactions_1 = require("./src/fetchAndStoreTransactions");
 dotenv.config();
 // Create Express app
 const app = (0, express_1.default)();
 exports.app = app;
 const port = process.env.PORT || 3000;
 // Enable CORS for frontend (Enable only 1)
-app.use((0, cors_1.default)({ origin: 'https://smartcrow.xyz'
+app.use((0, cors_1.default)({ origin: 
+    // 'https://smartcrow.xyz'
+    '*'
 }));
 app.use(express_1.default.json()); // Parse JSON bodies
 app.use(express_1.default.urlencoded({ extended: true, limit: '10kb' })); // Parse URL-encoded bodies
@@ -69,16 +72,16 @@ app.use(helmet_1.default.noSniff()); // set X-Content-Type-Options header
 app.use(helmet_1.default.frameguard()); // set X-Frame-Options header
 app.use(helmet_1.default.xssFilter()); // set X-XSS-Protection header
 const limiter1 = (0, express_rate_limit_1.default)({
-    windowMs: 1440 * 60 * 1000,
-    limit: 15,
-    standardHeaders: 'draft-7',
+    windowMs: 1440 * 60 * 1000, // 1 minute X 1440 = 1 day
+    limit: 15, // Limit each IP to 15 requests per `window` (here, per 15 day).
+    standardHeaders: 'draft-7', // draft-6: `RateLimit-*` headers; draft-7: combined `RateLimit` header
     legacyHeaders: false, // Disable the `X-RateLimit-*` headers.
     // store: ... , // Use an external store for consistency across multiple server instances.
 });
 const limiter2 = (0, express_rate_limit_1.default)({
-    windowMs: 1440 * 60 * 1000,
-    limit: 500,
-    standardHeaders: 'draft-7',
+    windowMs: 1440 * 60 * 1000, // 1 minute X 1440 = 1 day
+    limit: 500, // Limit each IP to 500 requests per `window` (here, per 500 day).
+    standardHeaders: 'draft-7', // draft-6: `RateLimit-*` headers; draft-7: combined `RateLimit` header
     legacyHeaders: false, // Disable the `X-RateLimit-*` headers.
     // store: ... , // Use an external store for consistency across multiple server instances.
 });
@@ -144,6 +147,39 @@ app.post('/api/send-email', [
         res.json({
             status: 200,
             message: "Email Sent"
+        });
+    }
+    catch (error) {
+        // Handle errors
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}));
+app.post('/api/get-transactions', [
+    // Validate the 'address' field
+    (0, express_validator_1.body)('url').isLength({ min: 15 }),
+    // Validate the 'address' field
+    (0, express_validator_1.body)('address').isLength({ min: 42 }),
+], (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        // Perform the validation by checking for errors
+        const errors = (0, express_validator_1.validationResult)(req);
+        // If there are validation errors, respond with a 400 Bad Request status
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
+        // Extract variables from the request body
+        const requestbody = req.body;
+        console.log(requestbody);
+        const url = requestbody.url.toString();
+        const address = requestbody.address.toString();
+        const result = yield (0, fetchAndStoreTransactions_1.getTransactionsPageData)(url, address);
+        console.log(result);
+        // Send the response with the required values and status
+        res.json({
+            result: result,
+            status: 200,
+            message: "Transactions Result Sent"
         });
     }
     catch (error) {

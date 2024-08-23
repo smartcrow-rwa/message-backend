@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.checkAndUpdate = void 0;
+exports.checkAndUpdate = checkAndUpdate;
 const checkDeadline_1 = require("./checkDeadline");
 const checkSalesConditions_1 = require("./checkSalesConditions");
 const readBonusInfo_1 = require("./readBonusInfo");
@@ -34,4 +34,3 @@ function checkAndUpdate(sender, receiver, propertyNumber) {
         }
     });
 }
-exports.checkAndUpdate = checkAndUpdate;

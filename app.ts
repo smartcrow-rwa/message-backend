@@ -13,6 +13,7 @@ import { checkAndUpdate } from './src/checkAndUpdate';
 // Load environment variables from .env file
 import * as dotenv from 'dotenv';
 import { sendEmail } from './src/sendEmail';
+import { getTransactionsPageData } from './src/fetchAndStoreTransactions';
 dotenv.config();
 
 // Create Express app
@@ -131,6 +132,43 @@ app.post('/api/send-email',[
     res.json({
       status: 200,
       message: "Email Sent"
+    });
+   
+  } catch (error) {
+    // Handle errors
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+app.post('/api/get-transactions',[
+  // Validate the 'address' field
+  body('url').isLength({ min: 15 }),
+
+  // Validate the 'address' field
+  body('address').isLength({ min: 42 }),
+], async (req: Request, res: Response) => {
+  try {
+    // Perform the validation by checking for errors
+    const errors = validationResult(req);
+
+    // If there are validation errors, respond with a 400 Bad Request status
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    // Extract variables from the request body
+    const requestbody = req.body;
+    console.log(requestbody)
+    const url:string= requestbody.url.toString();
+    const address:string= requestbody.address.toString();
+    const result = await getTransactionsPageData(url, address);
+    console.log(result);
+    // Send the response with the required values and status
+    res.json({
+      result: result,
+      status: 200,
+      message: "Transactions Result Sent"
     });
    
   } catch (error) {

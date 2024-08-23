@@ -35,7 +35,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.sendEmail = void 0;
+exports.sendEmail = sendEmail;
 const nodejs_1 = __importDefault(require("@emailjs/nodejs"));
 const dotenv = __importStar(require("dotenv"));
 dotenv.config();
@@ -77,4 +77,3 @@ function sendEmail(mailReceiver, mailMessage) {
         }
     });
 }
-exports.sendEmail = sendEmail;

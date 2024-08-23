@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.checkSalesConditions = void 0;
+exports.checkSalesConditions = checkSalesConditions;
 const getPropertyDetails_1 = require("./getPropertyDetails");
 const unixToDateConverter_1 = require("./unixToDateConverter");
 function checkSalesConditions(stringArray, propertyNumber, minRequestDays) {
@@ -89,4 +89,3 @@ function checkSalesConditions(stringArray, propertyNumber, minRequestDays) {
         // Check Sales time within agreement's start or end date
     });
 }
-exports.checkSalesConditions = checkSalesConditions;

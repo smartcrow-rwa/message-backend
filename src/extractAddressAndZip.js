@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.extractAddressAndZip = void 0;
+exports.extractAddressAndZip = extractAddressAndZip;
 function extractAddressAndZip(address1) {
     const parts1 = address1.split(/[\s,-]+/);
     let streetAddress1 = parts1.slice(0, 3).join(' ');
@@ -22,4 +22,3 @@ function extractAddressAndZip(address1) {
     const formattedAddress1 = addressParts1[0] + " " + street1 + ', ' + city1 + ', ' + state1 + " " + addressInfo1.postalCode;
     return [formattedAddress1, addressInfo1.streetAddress, addressInfo1.postalCode];
 }
-exports.extractAddressAndZip = extractAddressAndZip;

@@ -32,7 +32,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.readBonusInfo = void 0;
+exports.readBonusInfo = readBonusInfo;
 const contract_1 = require("../contract/contract");
 const ethers_1 = require("ethers");
 const dotenv = __importStar(require("dotenv"));
@@ -53,4 +53,3 @@ function readBonusInfo(sender, receiver, propertyNumber) {
         return tx;
     });
 }
-exports.readBonusInfo = readBonusInfo;
